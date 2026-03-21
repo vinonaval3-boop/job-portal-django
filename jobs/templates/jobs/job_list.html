@@ -1,0 +1,55 @@
+{% extends "jobs/base.html" %}
+
+{% block content %}
+
+<style>
+.job-card {
+    transition: 0.3s;
+}
+.job-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    transform: scale(1.05);
+}
+</style>
+
+<h2 class="mb-4">Available Jobs</h2>
+
+<!-- 🔥 Search Input -->
+<input type="text" id="searchInput" class="form-control mb-4" placeholder="Search jobs...">
+
+<div class="row">
+    {% for job in jobs %}
+    <div class="col-md-4">
+        <div class="card mb-3 shadow-sm job-card">
+            <div class="card-body">
+                <h5>{{ job.title }}</h5>
+                <p>{{ job.company }}</p>
+                <p>{{ job.location }}</p>
+
+                <a href="{% url 'job_detail' job.id %}" class="btn btn-primary">
+                    View Details
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- 🔥 JS inside block -->
+<script>
+document.getElementById("searchInput").addEventListener("keyup", function() {
+    let value = this.value.toLowerCase();
+    let jobs = document.querySelectorAll(".job-card");
+
+    jobs.forEach(job => {
+        let text = job.innerText.toLowerCase();
+        job.style.display = text.includes(value) ? "block" : "none";
+    });
+});
+</script>
+
+{% endblock %}
