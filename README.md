@@ -79,3 +79,13 @@ python manage.py runserver
 - Application Form
 - User Dashboard
 - Admin Panel
+
+## 📦 Sample Data (Fixtures)
+
+Pre-loaded job data available for quick setup:
+
+```bash
+python manage.py loaddata fixtures/jobs.json
+```
+
+Loads sample jobs from: TCS, Infosys, Wipro, Zoho, HCL
